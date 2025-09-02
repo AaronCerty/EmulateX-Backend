@@ -1,0 +1,25 @@
+name: Deploy backend staging
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  deploy-backend-staging:
+    runs-on: staging-backend-runner
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy backend staging
+        run: |
+          docker build -t emulatex-backend:staging . 
+          mv ./docker-compose.staging.yaml /home/ubuntu/emulatex/Emulate-Backend
+          cp ./.github/workflows/noti-tele.sh /home/ubuntu/emulatex/Emulate-Backend
+          cd /home/ubuntu/emulatex/Emulate-Backend
+          docker compose -f docker-compose.staging.yaml up -d
+
+      - name: Send notification to telegram
+        run: |
+          .github/workflows/noti-tele.sh "[Bot-CICD] Deploy backend staging success. @thomas8198 @ldthang98"

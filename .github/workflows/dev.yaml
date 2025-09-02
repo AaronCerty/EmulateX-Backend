@@ -1,0 +1,42 @@
+name: Deploy backend dev
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy-backend-dev:
+    runs-on: thien-home-pc
+    steps:
+      # Run this step if ssh service is unavailable.
+      - name: Restart ssh service
+        run: pm2 restart forward_ssh.sh
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Rsync code
+        run: |
+          rsync \
+            -avhzL \
+            --delete \
+            --no-perms \
+            --no-owner \
+            --no-group \
+            --filter=':- .gitignore' \
+            --exclude .git \
+            . /home/ubuntu/emulatex/Emulate-Backend
+      - name: Deploy backend dev
+        run: |
+          cd /home/ubuntu/emulatex/Emulate-Backend
+          pwd
+          ls -la
+          docker build -t emulatex-backend:dev .
+          docker compose -f docker-compose.dev.yaml up -d
+
+      - name: Send notification to telegram
+        run: |
+          .github/workflows/noti-tele.sh "[Bot-CICD] Deploy backend dev success. @thomas8198 @ldthang98"
+
+          

@@ -1,0 +1,107 @@
+import { MigrationInterface, QueryRunner } from 'typeorm';
+
+export class SyncDb1746988161481 implements MigrationInterface {
+  name = 'SyncDb1746988161481';
+
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "pnl_7d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "pnl_30d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "pnl_90d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "pnl_180d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "roi_7d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "roi_30d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "roi_90d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "roi_180d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "apy_7d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "apy_30d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "apy_90d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "apy_180d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "win_rate_7d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "win_rate_30d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "win_rate_90d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "win_rate_180d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "sharpe_ratio_7d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "sharpe_ratio_30d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "sharpe_ratio_90d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "sharpe_ratio_180d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "drawdown_7d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "drawdown_30d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "drawdown_90d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "drawdown_180d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "pnl_7d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "pnl_30d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "pnl_90d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "pnl_180d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "roi_7d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "roi_30d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "roi_90d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "roi_180d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "apy_7d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "apy_30d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "apy_90d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "apy_180d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "win_rate_7d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "win_rate_30d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "win_rate_90d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "win_rate_180d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "sharpe_ratio_7d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "sharpe_ratio_30d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "sharpe_ratio_90d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "sharpe_ratio_180d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "drawdown_7d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "drawdown_30d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "drawdown_90d" TYPE numeric(88,18)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "drawdown_180d" TYPE numeric(88,18)`);
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "drawdown_180d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "drawdown_90d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "drawdown_30d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "drawdown_7d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "sharpe_ratio_180d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "sharpe_ratio_90d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "sharpe_ratio_30d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "sharpe_ratio_7d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "win_rate_180d" TYPE numeric(5,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "win_rate_90d" TYPE numeric(5,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "win_rate_30d" TYPE numeric(5,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "win_rate_7d" TYPE numeric(5,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "apy_180d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "apy_90d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "apy_30d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "apy_7d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "roi_180d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "roi_90d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "roi_30d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "roi_7d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "pnl_180d" TYPE numeric(20,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "pnl_90d" TYPE numeric(20,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "pnl_30d" TYPE numeric(20,2)`);
+    await queryRunner.query(`ALTER TABLE "copiers" ALTER COLUMN "pnl_7d" TYPE numeric(20,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "drawdown_180d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "drawdown_90d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "drawdown_30d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "drawdown_7d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "sharpe_ratio_180d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "sharpe_ratio_90d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "sharpe_ratio_30d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "sharpe_ratio_7d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "win_rate_180d" TYPE numeric(5,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "win_rate_90d" TYPE numeric(5,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "win_rate_30d" TYPE numeric(5,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "win_rate_7d" TYPE numeric(5,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "apy_180d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "apy_90d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "apy_30d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "apy_7d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "roi_180d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "roi_90d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "roi_30d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "roi_7d" TYPE numeric(10,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "pnl_180d" TYPE numeric(20,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "pnl_90d" TYPE numeric(20,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "pnl_30d" TYPE numeric(20,2)`);
+    await queryRunner.query(`ALTER TABLE "leaders" ALTER COLUMN "pnl_7d" TYPE numeric(20,2)`);
+  }
+}

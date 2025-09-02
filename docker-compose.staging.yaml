@@ -1,0 +1,122 @@
+version: '3'
+services:
+  backend-api:
+    image: emulatex-backend:staging
+    container_name: emulatex-backend-api
+    restart: always
+    ports:
+      - 3000:3000
+    env_file:
+      - .env.staging.api
+    depends_on:
+      - postgres
+      - redis
+      - redpanda
+      - backend-migration
+
+  backend-crawler-blockchain:
+    image: emulatex-backend:staging
+    container_name: emulatex-backend-crawler-blockchain
+    restart: always
+    env_file:
+      - .env.staging.crawler-blockchain
+    depends_on:
+      - postgres
+      - redis
+      - redpanda
+      - backend-migration
+
+  backend-consumer:
+    image: emulatex-backend:staging
+    container_name: emulatex-backend-consumer
+    restart: always
+    env_file:
+      - .env.staging.consumer
+    depends_on:
+      - postgres
+      - redis
+      - redpanda
+      - backend-migration
+
+  backend-crawler:
+    image: emulatex-backend:staging
+    container_name: emulatex-backend-crawler
+    restart: always
+    env_file:
+      - .env.staging.crawler
+    depends_on:
+      - postgres
+      - redis
+      - redpanda
+      - backend-migration
+
+  backend-migration:
+    image: emulatex-backend:staging
+    container_name: emulatex-backend-migration
+    command: sh -c "yarn typeorm:migrate:prod && exit 0"
+    env_file:
+      - .env.staging.api
+    depends_on:
+      - postgres
+      - redis
+      - redpanda
+
+  postgres:
+    image: postgres:16-alpine
+    platform: linux/x86_64
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1
+      POSTGRES_DB: default
+      LANG: C.UTF-8
+    ports:
+      - 5402:5432
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  redis:
+    image: 'redis:6-alpine'
+    platform: linux/x86_64
+    restart: always
+    ports:
+      - 6309:6379
+    volumes:
+      - ./redis-data:/data
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:latest
+    user: root
+    restart: always
+    command:
+      - redpanda start
+      - --smp 1
+      - --overprovisioned
+      - --node-id 0
+      - --kafka-addr PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+      - --advertise-kafka-addr PLAINTEXT://redpanda:29092,OUTSIDE://redpanda:9092
+      - --pandaproxy-addr PLAINTEXT://0.0.0.0:28082,OUTSIDE://0.0.0.0:8082
+      - --advertise-pandaproxy-addr PLAINTEXT://redpanda:28082,OUTSIDE://redpanda:8082
+    ports:
+      - 8081:8081
+      - 8082:8082
+      - 9092:9092
+      - 28082:28082
+      - 29092:29092
+    volumes:
+      - ./redpanda-data:/var/lib/redpanda/data
+    environment:
+      - AUTO_CREATE_TOPICS=true
+  redpanda-console:
+    image: docker.redpanda.com/redpandadata/console:latest
+    entrypoint: /bin/sh
+    command: -c "echo \"$$CONSOLE_CONFIG_FILE\" > /tmp/config.yml; /app/console"
+    restart: always
+    environment:
+      CONFIG_FILEPATH: /tmp/config.yml
+      CONSOLE_CONFIG_FILE: |
+        kafka:
+          brokers: ["redpanda:29092"]
+    ports:
+      - 22222:8080
+    depends_on:
+      - redpanda
