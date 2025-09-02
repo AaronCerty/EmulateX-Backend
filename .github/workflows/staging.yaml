@@ -22,4 +22,4 @@ jobs:
 
       - name: Send notification to telegram
         run: |
-          .github/workflows/noti-tele.sh "[Bot-CICD] Deploy backend staging success. @thomas8198 @ldthang98"
+          .github/workflows/noti-tele.sh "[Bot-CICD] Deploy backend staging success."
